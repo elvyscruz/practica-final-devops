@@ -19,6 +19,9 @@ jobs:
       - name: Run tests
         run: npm run test
 
+      - name: fetch all branches
+        run: git fetch --all
+
       - name: Merge to main if tests pass
         if: success()
         run: |
