@@ -1,0 +1,44 @@
+name: Practica Final Devops
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - main
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run unit tests
+        run: npm test
+
+  deploy-to-surge:
+    name: Deploy to Surge
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Instalar surge
+        run: |
+          npm install -g Surge
+
+      - name: Despliegue a Surge
+        run: |
+          surge --project ./ --domain elvyscruz --token ${{ secrets.SURGE_TOKEN }}
