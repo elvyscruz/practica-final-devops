@@ -5,7 +5,7 @@ on:
     branches:
       - '*'
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,23 +23,19 @@ jobs:
       - name: Run unit tests
         run: npm test
 
-name: Deploy to Surge
-
-on:
-  push:
-    branches:
-      - main
-jobs:
-  deploy:
+  name: Deploy to Surge
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'  
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Instalar surge
         run: |
-          npm install --global surge
+          npm install
+          npm install -g Surge
 
-      - name: Hacer deploy
+      - name: Despliegue a Surge
         run: |
           surge --project ./ --domain elvyscruz --token ${{ secrets.SURGE_TOKEN }}
