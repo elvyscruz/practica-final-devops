@@ -37,7 +37,7 @@ jobs:
 
       - name: Instalar surge
         run: |
-          npm install -g Surge
+          npm install -g surge
 
       - name: Despliegue a Surge
         run: |
