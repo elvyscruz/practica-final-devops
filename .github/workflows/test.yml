@@ -10,6 +10,7 @@ on:
 jobs:
   build-and-test:
     name: Build and Test
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -27,6 +28,7 @@ jobs:
 
   deploy-to-surge:
     name: Deploy to Surge
+    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
     steps:
