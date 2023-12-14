@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - main
 
 jobs:
   test:
@@ -18,13 +19,3 @@ jobs:
 
       - name: Run tests
         run: npm run test
-
-      - name: fetch all branches
-        run: git fetch --all
-
-      - name: Merge to main if tests pass
-        if: success()
-        run: |
-          git checkout main
-          git merge dev --no-ff --no-edit
-          git push origin main
