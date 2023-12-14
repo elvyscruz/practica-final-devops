@@ -41,4 +41,4 @@ jobs:
 
       - name: Despliegue a Surge
         run: |
-          surge --project ./ --domain elvyscruz --token ${{ secrets.SURGE_TOKEN }}
+          surge --project ./ --domain elvyscruz.surge.sh --token ${{ secrets.SURGE_TOKEN }}
