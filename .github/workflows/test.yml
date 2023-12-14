@@ -1,13 +1,15 @@
-name: Run Tests
+name: Practica Final Devops
 
 on:
   push:
     branches:
       - '*'
+  pull_request:
+    branches:
+      - main
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
-
+  name: Build and Test
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -23,9 +25,9 @@ jobs:
       - name: Run unit tests
         run: npm test
 
-  deploy-to-surge
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'  
+  deploy-to-surge:
+    name: Deploy to Surge
+    if: github.ref == 'refs/heads/main'  
 
     steps:
       - name: Checkout repository
@@ -33,7 +35,6 @@ jobs:
 
       - name: Instalar surge
         run: |
-          npm install
           npm install -g Surge
 
       - name: Despliegue a Surge
